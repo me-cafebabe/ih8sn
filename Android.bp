@@ -1,23 +1,26 @@
 cc_binary {
     name: "ih8sn",
-    init_rc: ["ih8sn.rc"],
+    init_rc: ["etc/ih8sn.rc"],
 
     local_include_dirs: [
         "aosp/bionic/libc",
-        "aosp/bionic/libc/async_safe/include",
         "aosp/bionic/libc/system_properties/include",
-        "aosp/system/core/base/include",
-        "aosp/system/core/property_service/libpropertyinfoparser/include",
     ],
 
     srcs: [
-        "aosp/**/*.cpp",
+        "aosp/bionic/libc/bionic/*.cpp",
+        "aosp/bionic/libc/system_properties/*.cpp",
         "config.cpp",
         "main.cpp",
         "properties.cpp",
     ],
 
+    shared_libs: [
+        "libbase",
+    ],
+
     static_libs: [
         "libasync_safe",
+        "libpropertyinfoparser",
     ],
 }
